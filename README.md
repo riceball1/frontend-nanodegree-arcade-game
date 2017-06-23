@@ -5,11 +5,12 @@ frontend-nanodegree-arcade-game
 
 1. Run Game
     - You can go to the following [link](http://www.danafng.com/udacity-fend/arcade-game/index.html) to play the game online
-    - ```Git Clone ``` repo and drag index.html into the browser to play game
+    - To play locally: ```Git Clone ``` repo and drag index.html into the browser to play game
 2. Play Game
    - Use keyboard arrow keys to move UP, DOWN, LEFT, RIGHT
+   - Use spacebar to pause the game
+   - Capture gems to get 2 extra points
    - Objective: Cross to the river without colliding with a bug
-
 
 ## Screenshot
 
