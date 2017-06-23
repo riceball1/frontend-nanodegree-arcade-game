@@ -1,3 +1,53 @@
 body {
     text-align: center;
+    font-family: 'Bahiana', cursive;
+    background: darkgray;
+    font-size: 2em;
+}
+
+.scoreboard {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 5px;
+    border: 5px dashed black;
+    background-color: pink;
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.instructions {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    padding: 5px;
+    width: 20%;
+    text-align: center;
+    background-color: pink;
+    border: 5px dashed black;
+}
+
+.spacebar {
+    border: 1px solid black;
+}
+
+span {
+    color: white;
+}
+
+#winner-message {
+    position: absolute;
+    top: 30%;
+    left: 30%;
+    color: yellow;
+    display: none;
+}
+
+#gameover {
+	position: absolute;
+	top: 30%;
+	left: 40%;
+	color: yellow;
+	display: none;
 }

@@ -25,8 +25,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
-    canvas.height = 606;
+    canvas.width = 708;
+    canvas.height = 690;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -56,7 +56,10 @@ var Engine = (function(global) {
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
+
         win.requestAnimationFrame(main);
+
+
     }
 
     /* This function does some initial setup that should only occur once,
@@ -67,6 +70,8 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+        // create Gems when starting up app
+        createGems(Math.floor(Math.random() * (2 - 1) + 1));
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -79,8 +84,62 @@ var Engine = (function(global) {
      * on the entities themselves within your app.js file).
      */
     function update(dt) {
-        updateEntities(dt);
-        // checkCollisions();
+        if (!player.gamePaused) {
+            updateEntities(dt);
+            checkCollisions();
+            checkPlayerLives();
+            if (allGems.length === 0) {
+                // add more gems to stage
+                createGems(Math.floor(Math.random() * (2 - 1) + 1));
+            }
+        }
+    }
+
+    /* This is called by the update functino and loops through allEnemies
+     * it will check if the player and enemy are within each other's boundaries
+     * if there is a collision detected then the player will lose a life and then reset the player
+     * to its original position
+     */
+    function checkCollisions() {
+        // if player still has lives continue reducing lives if collision detected
+        if (player.lives > 0) {
+            allEnemies.forEach(function(enemy) {
+                if (enemy.x < player.x + player.width && enemy.x + enemy.width > player.x && enemy.y < player.y + player.height && enemy.height + enemy.y > player.y) {
+                    player.lives--;
+                    player.reset();
+                }
+            });
+
+            // check if user steps on gems
+            allGems.forEach(function(gem, index, arr) {
+                if (gem.x < player.x + player.width && gem.x + gem.width > player.x && gem.y < player.y + player.height && gem.height + gem.y > player.y) {
+                    // add two points to total if player captures gem
+                    player.total += 2;
+                    // remove gem
+                    arr.splice(index, 1);
+                }
+            })
+        }
+
+
+    }
+
+    //  This is called by the update function and 
+    // * determines if the player has lost too many lives
+    // * if the player has zero lives the entire game will reset
+
+
+    function checkPlayerLives() {
+        if (player.lives === 0) {
+            // pause game
+            player.gamePaused = true;
+
+            // display game over message
+            document.querySelector('#gameover').style.display = "block";
+
+
+            // TODO: add text on top of canvas for game over
+        }
     }
 
     /* This is called by the update function and loops through all of the
@@ -108,15 +167,17 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/water-block.png',
+                'images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 4 of stone
+                'images/stone-block.png', // Row 2 of 4 of stone
+                'images/stone-block.png', // Row 3 of 4 of stone
+                'images/stone-block.png', // Row 4 of 4 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = 7,
+            numCols = 8,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
@@ -151,6 +212,9 @@ var Engine = (function(global) {
             enemy.render();
         });
 
+        allGems.forEach(function(gem) {
+            gem.render();
+        })
         player.render();
     }
 
@@ -159,7 +223,7 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
+
     }
 
     /* Go ahead and load all of the images we know we're going to need to
@@ -171,7 +235,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-cat-girl.png',
+        'images/GemBlue.png'
     ]);
     Resources.onReady(init);
 

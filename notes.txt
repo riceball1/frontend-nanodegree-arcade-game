@@ -1,0 +1,9 @@
+ctx.strokeStyle = "#3C3";
+        ctx.strokeRect(50, 50, 100, 100);
+        ctx.beginPath();
+        ctx.moveTo(75, 75);
+        ctx.lineTo(125, 125);
+        ctx.lineTo(125, 75);
+        ctx.fillStyle = "blue";
+        ctx.fill();
+        ctx.strokeText("Hello Udacity", 50, 100);

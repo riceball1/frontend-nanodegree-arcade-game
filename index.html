@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href="https://fonts.googleapis.com/css?family=Bahiana" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
+    <div class="scoreboard">
+        <p>Total Score: <span id="total">0</span>
+            <br> Lives: <span id="lives"></span>
+    </div>
+    <div class="instructions">
+        <p>Use keyboard arrows to go UP, DOWN, LEFT, RIGHT</p>
+        <p><span class="spacebar">Spacebar</span> to PAUSE game</p>
+        <p>Collect gems for 2 extra points</p>
+    </div>
+    <div id="winner-message">
+        <h2>Good Job! You made it safely to the river!</h2>
+    </div>
+    <div id="gameover">
+        <h2>Game Over</h2>
+        <button onClick="restart()">Try Again</button>
+    </div>
     <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+    <script src="js/app.js"></script>
 </body>
+
 </html>
