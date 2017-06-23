@@ -4,7 +4,7 @@ frontend-nanodegree-arcade-game
 ## How to Play Arcade Game:
 
 1. Run Game
-    - You can go to the following [link](http://www.danafng.com/udacity-fend/arcade-game/index.html) to play the game online
+    - You can go to the following [link](http://www.danafng.com/udacity-arcade-game/) to play the game online
     - To play locally: ```Git Clone ``` repo and drag index.html into the browser to play game
 2. Play Game
    - Use keyboard arrow keys to move UP, DOWN, LEFT, RIGHT
